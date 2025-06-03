@@ -5,7 +5,7 @@ from bandit import Bandit, Agent
 
 runs = 200
 steps = 1000
-epsilon = 0.1
+epsilon = 0.1  # 0.1が「活用と探索」のバランスが一番良い
 all_rates = np.zeros((runs, steps))  # (2000, 1000)
 
 for run in range(runs):

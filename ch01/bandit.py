@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 class Bandit:
     def __init__(self, arms=10):
-        self.rates = np.random.rand(arms)
+        self.rates = np.random.rand(arms)  # 各マシンの確率
 
     def play(self, arm):
         rate = self.rates[arm]
@@ -20,17 +20,20 @@ class Agent:
         self.Qs = np.zeros(action_size)
         self.ns = np.zeros(action_size)
 
+    # 価値の推定関数
     def update(self, action, reward):
         self.ns[action] += 1
         self.Qs[action] += (reward - self.Qs[action]) / self.ns[action]
 
     def get_action(self):
+        # epsilonの確率で探索
         if np.random.rand() < self.epsilon:
             return np.random.randint(0, len(self.Qs))
+        # それ以外は現在のQ値が最大のアクションを選択
         return np.argmax(self.Qs)
 
 
-if __name__ == '__main__':
+def main():
     steps = 1000
     epsilon = 0.1
 
@@ -47,9 +50,14 @@ if __name__ == '__main__':
         total_reward += reward
 
         total_rewards.append(total_reward)
+        # 勝った割合
         rates.append(total_reward / (step + 1))
 
-    print(total_reward)
+    print(f"Total reward: {total_reward}")
+    print(f"Estimated rates: {agent.Qs}")
+    print(f"Actual rates: {bandit.rates}")
+    print(f"Estimated best action: {np.argmax(agent.Qs)}")
+    print(f"Actual best action: {np.argmax(bandit.rates)}")
 
     plt.ylabel('Total reward')
     plt.xlabel('Steps')
@@ -60,3 +68,7 @@ if __name__ == '__main__':
     plt.xlabel('Steps')
     plt.plot(rates)
     plt.show()
+
+
+if __name__ == '__main__':
+    main()

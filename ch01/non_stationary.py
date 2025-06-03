@@ -10,7 +10,7 @@ class NonStatBandit:
 
     def play(self, arm):
         rate = self.rates[arm]
-        self.rates += 0.1 * np.random.randn(self.arms)  # Add noise
+        self.rates += 0.1 * np.random.randn(self.arms)  # 時間と共に変化する (非定常問題)
         if rate > np.random.rand():
             return 1
         else:
