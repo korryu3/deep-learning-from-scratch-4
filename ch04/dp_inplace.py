@@ -6,6 +6,7 @@ while True:
     delta = abs(t - V['L1'])
     V['L1'] = t
 
+    # 即座に新しいL1を使って更新ができ、収束スピードが速くなる
     t = 0.5 * (0 + 0.9 * V['L1']) + 0.5 * (-1 + 0.9 * V['L2'])
     delta = max(delta, abs(t - V['L2']))
     V['L2'] = t

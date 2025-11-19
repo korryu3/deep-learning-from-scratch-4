@@ -41,6 +41,7 @@ if __name__ == '__main__':
     env = GridWorld()
     gamma = 0.9
 
+    # 初期方策
     pi = defaultdict(lambda: {0: 0.25, 1: 0.25, 2: 0.25, 3: 0.25})
     V = defaultdict(lambda: 0)
 

@@ -12,6 +12,9 @@ class GridWorld:
             3: "RIGHT",
         }
 
+        # 1.0: りんご(goal)
+        # -1.0: 爆弾
+        # None: 壁(wall)
         self.reward_map = np.array(
             [[0, 0, 0, 1.0],
              [0, None, 0, -1.0],
